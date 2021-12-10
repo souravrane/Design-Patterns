@@ -67,6 +67,14 @@ class SizeSpecification(Specification):
         return item.size == self.size
 
 
+class AndSpecification(Specification):
+    def __init__(self, *args):
+        self.args = args
+
+    def isSatisfied(self, item):
+        return all(map(lambda spec: spec.isSatisfied(item), self.args))
+
+
 class BetterFilter(Filter):
     def filter(self, items, spec):
         for item in items:
@@ -94,3 +102,13 @@ if __name__ == "__main__":
     green = ColorSpecification(Color.GREEN)
     for p in bf.filter(products, green):
         print(f"- {p.name} is green")
+
+    print("Large products ")
+    large = SizeSpecification(Size.LARGE)
+    for p in bf.filter(products, large):
+        print(f"- {p.name} is large")
+
+    print("Large blue items")
+    largeAndBlue = AndSpecification(large, ColorSpecification(Color.BLUE))
+    for p in bf.filter(products, largeAndBlue):
+        print(f"- {p.name} is large and blue")
