@@ -3,30 +3,37 @@ const fs = require("fs");
 class Journal {
   constructor() {
     this.entries = {};
+    this.count = 0;
   }
 
   addEntry(text) {
-    let c = ++Journal.count;
+    let c = ++this.count;
     let entry = `${c}: ${text}`;
     this.entries[c] = entry;
     return c;
   }
 
   removeEntry(index) {
-    delete this.entries[index];
+    delete this.entries[index - 1];
   }
 
   toString() {
     return Object.values(this.entries).join("\n");
   }
-}
-Journal.count = 0;
 
-class PersistenceManager {
-  preprocess(j) {
-    //
+  // the below functionality might be used by other objects as well.
+  // As persistence is sth employed by various obhjects we cannot have them all in every class
+  /*
+  save(filename) {
+    fs.writeFileSync(filename, this.toString());
   }
 
+  load(filename) {}
+  loadFromWeb(url) {}
+  */
+}
+
+class PersistenceManager {
   saveToFile(journal, filename) {
     fs.writeFileSync(filename, journal.toString());
   }
