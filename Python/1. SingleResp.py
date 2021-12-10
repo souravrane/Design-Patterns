@@ -3,11 +3,11 @@ class Journal:
         self.entries = []
         self.count = 0
 
-    def add_entry(self, text):
+    def addEntry(self, text):
         self.count += 1
         self.entries.append(f"{self.count}:{text}")
 
-    def remove_entry(self, pos):
+    def removeEntry(self, pos):
         del self.entries[pos]
 
     def __str__(self):
@@ -30,18 +30,18 @@ class Journal:
 
 
 class PersistenceManager:
-    def save_to_file(journal, filename):
+    def saveToFile(journal, filename):
         file = open(filename, "w")
         file.write(str(journal))
         file.close()
 
 
 j = Journal()
-j.add_entry("I cried today!")
-j.add_entry("I ate a bug")
+j.addEntry("I cried today!")
+j.addEntry("I ate a bug")
 print(f"Journal entires: \n{j}")
 
 file = r"journal.txt"
-PersistenceManager.save_to_file(j, file)
+PersistenceManager.saveToFile(j, file)
 with open(file) as fh:
     print(fh.read())
