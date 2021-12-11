@@ -27,6 +27,7 @@ class Rectangle:
         return f"Width: ${self._width}, height: ${self._height}"
 
 
+# This class is unecessary.
 class Square(Rectangle):
     def __init__(self, size):
         Rectangle.__init__(self, size, size)
