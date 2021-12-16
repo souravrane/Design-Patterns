@@ -59,7 +59,7 @@ class MultiFunctionDevice(Printer, Scanner):
 
     @abstractmethod
     def scan(self, document):
-        passd
+        pass
 
 
 class MultiFunctionMachine(MultiFunctionDevice):
