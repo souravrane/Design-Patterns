@@ -1,6 +1,6 @@
 # A better idea would be to granularize these interfaces to support multifunctionality
 # Making an interface that feature too many elements is not a good idea
-from abc import abstractclassmethod, abstractmethod
+from abc import abstractmethod
 
 
 class Machine:
